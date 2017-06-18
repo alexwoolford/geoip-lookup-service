@@ -27,8 +27,6 @@ public class Controller {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //TODO: capture subdivisions
-
     private DatabaseReader reader = getDatabaseReader();
     private List chainrSpecJSON = JsonUtils.jsonToList(this.getClass().getClassLoader().getResourceAsStream("json/maxmind-jolt-shift-transform.json"));
     private Chainr chainr = Chainr.fromSpec( chainrSpecJSON );
@@ -45,9 +43,7 @@ public class Controller {
         Object transformedOutput = chainr.transform( JsonUtils.jsonToMap(response.toJson()));
 
         Gson gson = new Gson();
-        String json = gson.toJson(transformedOutput);
-
-        return json;
+        return gson.toJson(transformedOutput);
 
     }
 
