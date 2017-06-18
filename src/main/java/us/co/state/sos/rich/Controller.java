@@ -1,5 +1,9 @@
 package us.co.state.sos.rich;
 
+import com.bazaarvoice.jolt.Chainr;
+import com.bazaarvoice.jolt.JsonUtils;
+
+import com.google.gson.Gson;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.util.List;
 
 
 @RestController
@@ -22,7 +27,11 @@ public class Controller {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    DatabaseReader reader = getDatabaseReader();
+    //TODO: capture subdivisions
+
+    private DatabaseReader reader = getDatabaseReader();
+    private List chainrSpecJSON = JsonUtils.jsonToList(this.getClass().getClassLoader().getResourceAsStream("json/maxmind-jolt-shift-transform.json"));
+    private Chainr chainr = Chainr.fromSpec( chainrSpecJSON );
 
     public Controller() throws IOException {
     }
@@ -33,7 +42,12 @@ public class Controller {
         InetAddress ipAddress = InetAddress.getByName(ip);
         CityResponse response = reader.city(ipAddress);
 
-        return response.toJson();
+        Object transformedOutput = chainr.transform( JsonUtils.jsonToMap(response.toJson()));
+
+        Gson gson = new Gson();
+        String json = gson.toJson(transformedOutput);
+
+        return json;
 
     }
 

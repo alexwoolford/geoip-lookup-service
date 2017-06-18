@@ -1,0 +1,55 @@
+[{
+  "operation": "shift",
+  "spec": {
+    "city": {
+      "geoname_id": "city.geoname_id",
+      "names": {
+        "en": "city.name"
+      }
+    },
+    "continent": {
+      "geoname_id": "continent.geoname_id",
+      "names": {
+        "en": "continent.name"
+      },
+      "code": "continent.code"
+    },
+    "country": {
+      "geoname_id": "country.geoname_id",
+      "names": {
+        "en": "country.name"
+      },
+      "iso_code": "country.iso_code"
+    },
+    "location": {
+      "accuracy_radius": "location.accuracy_radius",
+      "latitude": "location.latitude",
+      "longitude": "location.longitude",
+      "metro_code": "location.metro_code",
+      "time_zone": "location.time_zone"
+    },
+    "postal": {
+      "code": "postal.code"
+    },
+    "registered_country": {
+      "geoname_id": "registered_country.geoname_id",
+      "names": {
+        "en": "registered_country.name"
+      },
+      "iso_code": "registered_country.iso_code"
+    },
+    "represented_country": {
+      "geoname_id": "represented_country.geoname_id",
+      "names": {
+        "en": "represented_country.name"
+      },
+      "iso_code": "represented_country.iso_code"
+    },
+    "traits": {
+      "ip_address": "traits.ip_address",
+      "is_anonymous_proxy": "traits.is_anonymous_proxy",
+      "is_legitimate_proxy": "traits.is_legitimate_proxy",
+      "is_satellite_provider": "traits.is_satellite_provider"
+    }
+  }
+}]
